@@ -1,13 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router'
-import ScoreCircle from './ScoreCircle'
+import ScoreCircle from './ScoreCircle';
+import {useEffect, useState} from "react";
+import {usePuterStore} from "~/lib/puter";
+
 
 const ResumeCard = ({resume:{id,companyName,feedback,imagePath,jobTitle}}:{resume:Resume}) => {
+
+    const { fs } = usePuterStore();
+    const [resumeUrl, setResumeUrl] = useState('');
+     useEffect(() => {
+        const loadResume = async () => {
+            const blob = await fs.read(imagePath);
+            if(!blob) return;
+            let url = URL.createObjectURL(blob);
+            setResumeUrl(url);
+        }
+
+        loadResume();
+    }, [imagePath]);
  
-    console.log(imagePath)
     return (
     <>
-    <Link to={`/resume/${id}`} className='resume-card animate-in fade-in duration-1000 w-full ' >
+    <Link to={`/resume/${id}`} className='resume-card animate-in fade-in duration-1000 ' >
     <div className='flex justify-between '>
         <div className='flex flex-col gap-2  '>
         <h2 className='!text-black font-bold break-words '>
@@ -25,7 +40,7 @@ const ResumeCard = ({resume:{id,companyName,feedback,imagePath,jobTitle}}:{resum
     <div className='gradient-border animate-in fade-in duration-1000 ' >
         <div className='w-full h-full' >
             <img 
-            src={imagePath}
+            src={resumeUrl}
             alt='resume'
             className=' w-full h-[350px] max-sm:h-[200px] object-cover  '
              />

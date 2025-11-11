@@ -59,9 +59,10 @@ const Resume = () => {
   return (
     <main className=' !pt-0 ' >
         <nav className='resume-nav'>
-            <Link to='/' className='back' />
+            <Link to='/' className='back flex items-center justify-center gap-2.5'>
             <img src='/icons/back.svg' alt='back' className='w-2.5 h-2.5' />
             <span className='text-gray-800 text-sm font-semibold'>Back to Homepage</span>
+            </Link>
         </nav>
         <div className='flex flex-row w-full max-lg:flex-col-reverse '>
             <section className='fedback-section bg-[url("/images/bg-small.svg") bg-cover h-[100vh] sticky top-0 items-center justify-center ] animate-in fade-in duration-1000 gradient-border max-sm:m-0 h-[90%] max-2xl:h-full  w-fit'>
